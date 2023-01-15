@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main">
+        <h1>
+            MULTIPLE URL SHORTENER
+        </h1>
+        <form action = "{% url 'multiple' %}" method="post">
+             {% csrf_token %}
+            <table id="inputTable" >
+                <tr>
+                    <td><input type="submit"></td>
+                    <td><button id="addRow" onclick="addRow1(event)" >Add</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="longURL" id="longURL"></td>
+                    <td><button id="removeRow" onclick="removeRow1(event)">Remove</button></td>
+                </tr>
+            </table> 
+            
+        </form>
+
+        <script>
+            var inputTable = document.getElementById('inputTable')
+            var row, cell1, cell2;
+            function removeRow1(e){
+                e = e || window.event
+                e.preventDefault()
+            }
+            /*removeRow.addEventListener('click',(e)=>{
+                e.preventDefault()
+            })*/
+            function addRow1(e){
+                e = e || window.event
+                e.preventDefault()
+                row = inputTable.insertRow()
+                cell1 = row.insertCell(0)
+                cell2 = row.insertCell(1)
+                cell1.innerHTML = '<input type="text" name="longURL" id="longURL">'
+                cell2.innerHTML = '<button id="removeRow" onclick="removeRow1(event)" >Remove</button>'
+            }
+        </script>
+
+        {% if shortURL %}
+        <h2> Your short url is:  {{ shortURL }} </h2>
+        {% elif invalid %}
+        <h2> {{ invalid }} </h2>
+       {% endif %}
+        </div>
+</body>
+</html>

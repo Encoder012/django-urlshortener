@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="error" ></div>
+    <script>
+        var error = document.getElementById("error")
+        var urls;
+        var a;
+        var val = true;
+        function openURLS(){
+            urls = ["https://google.com/", "https://imaginepy.co.in/", "http://localhost:8000"]
+            for (var i = 0; i<(urls.length-1); i++){
+                a = window.open(urls[i])
+                if(!a){
+                    val = false
+                    error.innerHTML = `<h1>Please allow pop ups<h1> <br> <button onclick='openURLS()'>Retry</button>`
+                }else{
+                    val = true
+                }
+            }
+            if (val){
+                location.href = urls[urls.length-1];
+            }
+        }
+        openURLS()
+    </script>
+</div>
+</body>
+</html>
